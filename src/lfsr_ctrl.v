@@ -155,7 +155,6 @@ module lfsr_ctrl (
             end else if (mode == MODE_RUN) begin
                 lfsr_reg <= lfsr_next;
             end else if (mode == MODE_HOLD) begin
-                // Explicitly do nothing to freeze the LFSR outputs
                 lfsr_reg <= lfsr_reg;
             end
         end
