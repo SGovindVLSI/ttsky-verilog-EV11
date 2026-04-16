@@ -49,7 +49,7 @@ async def test_reset(dut):
     """After reset, LFSR output must be 0x0001 (default seed, 8-bit mode)."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     # Reset
@@ -73,7 +73,7 @@ async def test_default_8bit_run(dut):
     """8-bit LFSR with default poly (x^8+x^6+x^5+x^4+1) must visit all 255 states."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset")
@@ -104,7 +104,7 @@ async def test_hold_mode(dut):
     """LFSR output must not change while mode = HOLD."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset")
@@ -142,7 +142,7 @@ async def test_load_seed(dut):
     """Load seed 0xA5C3, switch to RUN; verify LFSR starts from masked seed."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset")
@@ -175,7 +175,7 @@ async def test_load_seed_zero(dut):
     """Loading seed 0x0000 — zero-seed guard must promote LFSR to run from 0x0001."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset")
@@ -205,7 +205,7 @@ async def test_load_tap(dut):
     """Switching to poly index 1 (0x008E) must produce a different sequence."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     # --- Collect 50 states with default polynomial (index 0) ---
@@ -253,7 +253,7 @@ async def test_lockup_escape(dut):
     """Zero seed triggers guard; LFSR must escape to a non-zero state within 1 cycle."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset")
@@ -283,7 +283,7 @@ async def test_4bit_width(dut):
     """4-bit LFSR (x^4+x+1) must visit exactly 15 unique non-zero states."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset — 4-bit width")
@@ -318,7 +318,7 @@ async def test_12bit_width(dut):
     """12-bit LFSR: bits [11:8] = uio_out[3:0] must become non-zero within 100 cycles."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset — 12-bit width")
@@ -350,7 +350,7 @@ async def test_16bit_width(dut):
     """16-bit LFSR: uio_out[7] (lfsr_reg[15]) must go HIGH within 200 cycles."""
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 10, unit="us")
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     dut._log.info("Reset — 16-bit width")
