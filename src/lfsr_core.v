@@ -21,7 +21,6 @@
  */
 
 `default_nettype none
-`timescale 1ns / 1ps
 
 module lfsr_core (
     input  wire [15:0] lfsr_reg,   
