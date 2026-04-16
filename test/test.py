@@ -17,6 +17,9 @@ MODE_HOLD      = 0b11
 #   ui_in[5:4] = poly_idx   (used with LOAD_TAP; also = data_in[1:0])
 #   ui_in[7:4] = data_in    (nibble for LOAD_SEED)
 def make_ui(mode=MODE_RUN, width_sel=0b01, poly_idx=0b00, data_in=0b0000):
+    # If mode is LOAD_TAP, use poly_idx for bits 5:4. Otherwise use data_in.
+    if mode == MODE_LOAD_TAP:
+        data_in = (data_in & 0xC) | (poly_idx & 0x3)
     return (mode & 0x3) | ((width_sel & 0x3) << 2) | ((data_in & 0xF) << 4)
 
 # Helper: read combined 16-bit LFSR state from outputs
