@@ -58,7 +58,6 @@ module lfsr_ctrl (
     );
 
     wire entering_load_seed = (mode == MODE_LOAD_SEED) && (mode_prev != MODE_LOAD_SEED);
-    wire entering_load_tap  = (mode == MODE_LOAD_TAP)  && (mode_prev != MODE_LOAD_TAP);
     wire apply_seed         = (mode == MODE_RUN)        && (mode_prev == MODE_LOAD_SEED);
 
     // =========================================================================
@@ -155,8 +154,10 @@ module lfsr_ctrl (
 
             end else if (mode == MODE_RUN) begin
                 lfsr_reg <= lfsr_next;
+            end else if (mode == MODE_HOLD) begin
+                // Explicitly do nothing to freeze the LFSR outputs
+                lfsr_reg <= lfsr_reg;
             end
         end
     end
-
 endmodule
